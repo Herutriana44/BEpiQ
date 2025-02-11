@@ -84,20 +84,14 @@ class BEpiQ:
         # Menyimpan scaler untuk digunakan saat prediksi
         joblib.dump(self.scaler, scaler_save_path)
 
-        # Menyimpan data yang sudah dinormalisasi
-        X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
-
         # Mendefinisikan VQC model
-        num_qubits = X_train.shape[1]
+        num_qubits = X_scaled.shape[1]
         feature_map = self.feature_map
         ansatz = self.ansatz
         optimizer = self.optimizer
 
-        # Membuat model VQC
-        self.model = VQC(feature_map=feature_map, ansatz=ansatz, optimizer=optimizer)
-
         # Melatih model
-        self.model.fit(X_train, y_train)
+        self.model.fit(X_scaled, y)
 
         # Menyimpan model
         self.save_model(model_save_path)
