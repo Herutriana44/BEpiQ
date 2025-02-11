@@ -1,0 +1,6 @@
+qiskit
+qiskit-machine-learning
+qiskit-algorithms
+pylatexenc
+numpy
+scikit-learn
